@@ -19,10 +19,14 @@ docker ps | grep nginx
 docker inspect nginx
 ss -ltup
 docker run --rm -d --name nginx2 --network host nginx # fails due to port conflict
-docker network create -d macvlan --subnet 192.168.50.0/24 --gateway 192.168.50.1 --ip-range 192.168.50.77/32 -o parent=wlp37s0 custommacvlan # unused by gateway
+docker network create -d macvlan --subnet 192.168.50.0/24 --gateway 192.168.50.1 --ip-range 192.168.50.77/32 -o parent=enp12s0 custommacvlan # unused by gateway
 docker network ls
 docker run --name netshoot --rm -it --network custommacvlan nicolaka/netshoot /bin/bash
 docker run --name netshoot2 --rm -it --network custommacvlan --ip 192.168.50.78 nicolaka/netshoot /bin/bash
+> ping netshoot
+> ping netshoot2
+> ping renderws.home
+> ping mediapc.home
 ```
 
 ## Repo History
